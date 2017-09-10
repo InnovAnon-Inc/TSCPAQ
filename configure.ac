@@ -14,4 +14,6 @@ AC_OUTPUT
 AC_CHECK_LIB([pthread],[pthread_create,pthread_detach,pthread_kill])
 AC_CHECK_LIB([pthread],[pthread_mutex_init,pthread_mutex_lock,pthread_mutex_unlock])
 AC_CHECK_LIB([pthread],[pthread_cond_init,pthread_cond_wait,pthread_cond_signal,pthread_cond_broadcast])
+
 # TODO semaphores
+
