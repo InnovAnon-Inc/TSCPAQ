@@ -52,7 +52,7 @@ int tscpaq_free_queue (tscpaq_t *restrict q) {
 __attribute__ ((nonnull (1, 2), nothrow, warn_unused_result))
 int tscpaq_enqueue (
    tscpaq_t *restrict q,
-   void *restrict elem) {
+   void const *restrict elem) {
    error_check (pthread_mutex_lock (&(q->mutex)) != 0) return -1;
    do {
       error_check (pthread_mutex_unlock (&(q->mutex)) != 0) return -2;
