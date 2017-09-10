@@ -17,8 +17,8 @@ int main(void) {
    tscpaq_enqueue (&q, arr + 0);tscpaq_dumpq(&q, 2);
    tscpaq_enqueue (&q, arr + 1);tscpaq_dumpq(&q, 3);
    tscpaq_enqueue (&q, arr + 2);tscpaq_dumpq(&q, 4);
-   tscpaq_enqueue (&q, arr + 3);tscpaq_dumpq(&q, 5);
-   tscpaq_enqueue (&q, arr + 4);tscpaq_dumpq(&q, 6);
+   /*tscpaq_enqueue (&q, arr + 3);tscpaq_dumpq(&q, 5);
+   tscpaq_enqueue (&q, arr + 4);tscpaq_dumpq(&q, 6);*/
    /*memset (arr, 0, sizeof (arr));*/
    tscpaq_dequeue (&q, (void**)&tmp); printf ("%i\n", *tmp); tscpaq_dumpq(&q, 7);
    tscpaq_dequeue (&q, (void**)&tmp); printf ("%i\n", *tmp); tscpaq_dumpq(&q, 8);
