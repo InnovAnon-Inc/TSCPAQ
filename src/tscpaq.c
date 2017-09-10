@@ -74,7 +74,6 @@ int tscpaq_dequeue (tscpaq_t *q, void **ret) {
    return 0;
 }
 
-__attribute__ ((pure))
 int tscpaq_isempty (tscpaq_t *q, bool *ret) {
    if (pthread_mutex_lock (&(q->mutex)) != 0) return -1;
    *ret = isempty (&(q->cpaq));
@@ -82,7 +81,6 @@ int tscpaq_isempty (tscpaq_t *q, bool *ret) {
    return 0;
 }
 
-__attribute__ ((pure))
 int tscpaq_isfull (tscpaq_t *q, bool *ret) {
    if (pthread_mutex_lock (&(q->mutex)) != 0) return -1;
    *ret = isfull (&(q->cpaq));
@@ -90,7 +88,6 @@ int tscpaq_isfull (tscpaq_t *q, bool *ret) {
    return 0;
 }
 
-__attribute__ ((pure))
 int tscpaq_gethead (tscpaq_t *q, void **ret) {
    if (pthread_mutex_lock (&(q->mutex)) != 0) return -1;
    *ret = gethead (&(q->cpaq));

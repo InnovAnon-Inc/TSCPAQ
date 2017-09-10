@@ -19,21 +19,18 @@ typedef struct {
 	sem_t empty, full;
 } tscpaq_t;
 
-void init_queue (tscpaq_t *q, void *arr, size_t n);
-int alloc_queue (tscpaq_t *q, size_t n) ;
-void free_queue (tscpaq_t *q) ;
+void tscpaq_init_queue (tscpaq_t *q, void *arr, size_t n);
+int tscpaq_alloc_queue (tscpaq_t *q, size_t n) ;
+void tscpaq_free_queue (tscpaq_t *q) ;
 
 /* ret type == elem type */
-int dequeue (tscpaq_t *q, void **ret) ;
+int tscpaq_dequeue (tscpaq_t *q, void **ret) ;
 /* returns err code */
-int enqueue (tscpaq_t *q, void *elem) ;
-int isempty (tscpaq_t *q, bool *ret)
-__attribute__ ((pure)) ;
-int isfull (tscpaq_t *q, bool *ret)
-__attribute__ ((pure)) ;
-int gethead (tscpaq_t *q, void **ret)
-__attribute__ ((pure)) ;
-void dumpq(tscpaq_t *q, int i) ;
+int tscpaq_enqueue (tscpaq_t *q, void *elem) ;
+int tscpaq_isempty (tscpaq_t *q, bool *ret)
+int tscpaq_isfull (tscpaq_t *q, bool *ret)
+int tscpaq_gethead (tscpaq_t *q, void **ret)
+void tscpaq_dumpq(tscpaq_t *q, int i) ;
 
 #ifdef __cplusplus
 }
