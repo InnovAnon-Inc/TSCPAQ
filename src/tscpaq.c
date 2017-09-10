@@ -12,61 +12,77 @@ int head = 0;
 int tail = 0;
 */
 
-int tscpaq_init_queue (tscpaq_t *q, void *arr, size_t n) {
+__attribute__ ((nonnull (1, 2), nothrow, warn_unused_result))
+int tscpaq_init_queue (
+   tscpaq_t *restrict q,
+   void *restrict arr,
+   size_t n) {
    init_queue (&(q->cpaq), arr, n);
    q->mutex = (pthread_mutex_t) PTHREAD_MUTEX_INITIALIZER;
-   if (sem_init (&(q->full),  0, (unsigned int) n) != 0) return -1;
-   if (sem_init (&(q->empty), 0,                 0) != 0) return -2;
+   error_check (sem_init (&(q->full),  0, (unsigned int) n) != 0) return -1;
+   error_check (sem_init (&(q->empty), 0,                 0) != 0) return -2;
    return 0;
 }
 
-int tscpaq_uninit_queue (tscpaq_t *q) {
-   if (pthread_mutex_destroy (&(q->mutex)) != 0) return -1;
-   if (sem_destroy (&(q->full)) != 0) return -2;
-   if (sem_destroy (&(q->empty)) != 0) return -3;
+__attribute__ ((nonnull (1), nothrow, warn_unused_result))
+int tscpaq_uninit_queue (tscpaq_t *restrict q) {
+   error_check (pthread_mutex_destroy (&(q->mutex)) != 0) return -1;
+   error_check (sem_destroy (&(q->full)) != 0) return -2;
+   error_check (sem_destroy (&(q->empty)) != 0) return -3;
    return 0;
 }
 
-int tscpaq_alloc_queue (tscpaq_t *q, size_t n) {
-   void *arr = malloc (n * sizeof (void *));
-   if (arr == NULL) return -1;
+__attribute__ ((nonnull (1), nothrow, warn_unused_result))
+int tscpaq_alloc_queue (
+   tscpaq_t *restrict q,
+   size_t n) {
+   void *restrict arr = malloc (n * sizeof (void *));
+   error_check (arr == NULL) return -1;
    tscpaq_init_queue (q, arr, n);
    return 0;
 }
 
-int tscpaq_free_queue (tscpaq_t *q) {
+__attribute__ ((nonnull (1), nothrow, warn_unused_result))
+int tscpaq_free_queue (tscpaq_t *restrict q) {
    free_queue (&(q->cpaq));
-   if (tscpaq_uninit_queue (q) != 0) return -1;
+   error_check (tscpaq_uninit_queue (q) != 0) return -1;
    return 0;
 }
 
-int tscpaq_enqueue (tscpaq_t *q, void *elem) {
-   if (pthread_mutex_lock (&(q->mutex)) != 0) return -1;
+__attribute__ ((nonnull (1, 2), nothrow, warn_unused_result))
+int tscpaq_enqueue (
+   tscpaq_t *restrict q,
+   void *restrict elem) {
+   error_check (pthread_mutex_lock (&(q->mutex)) != 0) return -1;
    do {
-      if (pthread_mutex_unlock (&(q->mutex)) != 0) return -2;
-      if (sem_wait (&(q->full)) != 0) return -3;
-      if (pthread_mutex_lock (&(q->mutex)) != 0) return -4;
+      error_check (pthread_mutex_unlock (&(q->mutex)) != 0) return -2;
+      error_check (sem_wait (&(q->full)) != 0) return -3;
+      error_check (pthread_mutex_lock (&(q->mutex)) != 0) return -4;
+      /* TODO isfull() is unexptected ? */
    } while (isfull (&(q->cpaq))) ;
-   if (enqueue (&(q->cpaq), elem) != 0) {
+   error_check (enqueue (&(q->cpaq), elem) != 0) {
       /*sem_post (&(q->empty));*/
       /*q->done = true;*/
       pthread_mutex_unlock (&(q->mutex));
       return -5;
    }
-   if (sem_post (&(q->empty)) != 0) {
+   error_check (sem_post (&(q->empty)) != 0) {
       pthread_mutex_unlock (&(q->mutex));
       return -6;
    }
-   if (pthread_mutex_unlock (&(q->mutex)) != 0) return -7;
+   error_check (pthread_mutex_unlock (&(q->mutex)) != 0) return -7;
    return 0;
 }
 
-int tscpaq_dequeue (tscpaq_t *q, void **ret) {
-   if (pthread_mutex_lock (&(q->mutex)) != 0) return -1;
+__attribute__ ((nonnull (1, 2), nothrow, warn_unused_result))
+int tscpaq_dequeue (
+   tscpaq_t *restrict q,
+   void const *restrict *restrict ret) {
+   error_check (pthread_mutex_lock (&(q->mutex)) != 0) return -1;
    do {
-      if (pthread_mutex_unlock (&(q->mutex)) != 0) return -2;
-      if (sem_wait (&(q->empty)) != 0) return -3;
-      if (pthread_mutex_lock (&(q->mutex)) != 0) return -4;
+      error_check (pthread_mutex_unlock (&(q->mutex)) != 0) return -2;
+      error_check (sem_wait (&(q->empty)) != 0) return -3;
+      error_check (pthread_mutex_lock (&(q->mutex)) != 0) return -4;
    } while (isempty (&(q->cpaq))) ;
    *ret = dequeue (&(q->cpaq));
    /*if (ret == NULL) {*/
@@ -75,39 +91,50 @@ int tscpaq_dequeue (tscpaq_t *q, void **ret) {
    /*   pthread_mutex_unlock (&(q->mutex));
       return -5;
    }*/
-   if (sem_post (&(q->full)) != 0) {
+   error_check (sem_post (&(q->full)) != 0) {
       pthread_mutex_unlock (&(q->mutex));
       return -6;
    }
-   if (pthread_mutex_unlock (&(q->mutex)) != 0) return -7;
+   error_check (pthread_mutex_unlock (&(q->mutex)) != 0) return -7;
    return 0;
 }
 
-int tscpaq_isempty (tscpaq_t *q, bool *ret) {
-   if (pthread_mutex_lock (&(q->mutex)) != 0) return -1;
+__attribute__ ((nonnull (1, 2), nothrow, warn_unused_result))
+int tscpaq_isempty (
+   tscpaq_t *restrict q,
+   bool *restrict ret) {
+   error_check (pthread_mutex_lock (&(q->mutex)) != 0) return -1;
    *ret = isempty (&(q->cpaq));
-   if (pthread_mutex_unlock (&(q->mutex)) != 0) return -2;
+   error_check (pthread_mutex_unlock (&(q->mutex)) != 0) return -2;
    return 0;
 }
 
-int tscpaq_isfull (tscpaq_t *q, bool *ret) {
-   if (pthread_mutex_lock (&(q->mutex)) != 0) return -1;
+__attribute__ ((nonnull (1, 2), nothrow, warn_unused_result))
+int tscpaq_isfull (
+   tscpaq_t *restrict q,
+   bool *restrict ret) {
+   error_check (pthread_mutex_lock (&(q->mutex)) != 0) return -1;
    *ret = isfull (&(q->cpaq));
-   if (pthread_mutex_unlock (&(q->mutex)) != 0) return -2;
+   error_check (pthread_mutex_unlock (&(q->mutex)) != 0) return -2;
    return 0;
 }
 
-int tscpaq_gethead (tscpaq_t *q, void **ret) {
-   if (pthread_mutex_lock (&(q->mutex)) != 0) return -1;
+__attribute__ ((nonnull (1, 2), nothrow, warn_unused_result))
+int tscpaq_gethead (
+   tscpaq_t *restrict q,
+   void const *restrict *restrict ret) {
+   error_check (pthread_mutex_lock (&(q->mutex)) != 0) return -1;
    *ret = gethead (&(q->cpaq));
-   if (pthread_mutex_unlock (&(q->mutex)) != 0) return -2;
+   error_check (pthread_mutex_unlock (&(q->mutex)) != 0) return -2;
    return 0;
 }
 
-
-int tscpaq_dumpq(tscpaq_t *q, int i) {
-   if (pthread_mutex_lock (&(q->mutex)) != 0) return -1;
+__attribute__ ((nonnull (1), nothrow, warn_unused_result))
+int tscpaq_dumpq(
+   tscpaq_t *restrict q,
+   int i) {
+   error_check (pthread_mutex_lock (&(q->mutex)) != 0) return -1;
    dumpq (&(q->cpaq), i);
-   if (pthread_mutex_unlock (&(q->mutex)) != 0) return -2;
+   error_check (pthread_mutex_unlock (&(q->mutex)) != 0) return -2;
    return 0;
 }
