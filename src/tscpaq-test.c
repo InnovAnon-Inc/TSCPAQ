@@ -23,14 +23,14 @@ int main(void) {
    tscpaq_dequeue (&q, (void**)&tmp); printf ("%i\n", *tmp); tscpaq_dumpq(&q, 7);
    tscpaq_dequeue (&q, (void**)&tmp); printf ("%i\n", *tmp); tscpaq_dumpq(&q, 8);
    tscpaq_dequeue (&q, (void**)&tmp); printf ("%i\n", *tmp); tscpaq_dumpq(&q, 9);
-   tscpaq_dequeue (&q, (void**)&tmp);
+   /*tscpaq_dequeue (&q, (void**)&tmp);
    if (tmp == NULL) puts ("NULL");
    else printf("%i\n", *tmp);
    tscpaq_dumpq(&q, 10);
    tscpaq_dequeue (&q, (void**)&tmp);
    if (tmp == NULL) puts ("NULL");
    else printf("%i\n", *tmp);
-   tscpaq_dumpq(&q, 11);
+   tscpaq_dumpq(&q, 11);*/
 
    tscpaq_free_queue (&q);
    return EXIT_SUCCESS;
