@@ -1,5 +1,5 @@
-#ifndef _CAQ_H_
-#define _CAQ_H_
+#ifndef _TSCPAQ_H_
+#define _TSCPAQ_H_
 
 #ifdef __cplusplus
 extern "C" {
@@ -39,4 +39,4 @@ void dumpq(tscpaq_t *q, int i) ;
 }
 #endif
 
-#endif /* _CAQ_H_ */
+#endif /* _TSCPAQ_H_ */
