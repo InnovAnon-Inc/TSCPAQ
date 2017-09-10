@@ -11,30 +11,30 @@ int main(void) {
    int *tmp;
 
    tscpaq_t q;
-   tscaq_alloc_queue (&q, (size_t) N);
+   tscpaq_alloc_queue (&q, (size_t) N);
 
-   tscaq_dumpq(&q, 1);
-   tscaq_enqueue (&q, arr + 0);tscaq_dumpq(&q, 2);
-   tscaq_enqueue (&q, arr + 1);tscaq_dumpq(&q, 3);
-   tscaq_enqueue (&q, arr + 2);tscaq_dumpq(&q, 4);
-   tscaq_enqueue (&q, arr + 3);tscaq_dumpq(&q, 5);
-   tscaq_enqueue (&q, arr + 4);tscaq_dumpq(&q, 6);
+   tscpaq_dumpq(&q, 1);
+   tscpaq_enqueue (&q, arr + 0);tscpaq_dumpq(&q, 2);
+   tscpaq_enqueue (&q, arr + 1);tscpaq_dumpq(&q, 3);
+   tscpaq_enqueue (&q, arr + 2);tscpaq_dumpq(&q, 4);
+   tscpaq_enqueue (&q, arr + 3);tscpaq_dumpq(&q, 5);
+   tscpaq_enqueue (&q, arr + 4);tscpaq_dumpq(&q, 6);
    /*memset (arr, 0, sizeof (arr));*/
-   printf("%i\n", *(int *) tscaq_dequeue(&q));
-      tscaq_dumpq(&q, 7);
-   printf("%i\n", *(int *) tscaq_dequeue(&q));
-      tscaq_dumpq(&q, 8);
-   printf("%i\n", *(int *) tscaq_dequeue(&q));
-      tscaq_dumpq(&q, 9);
-   tmp = (int *) tscaq_dequeue (&q);
+   printf("%i\n", *(int *) tscpaq_dequeue(&q));
+      tscpaq_dumpq(&q, 7);
+   printf("%i\n", *(int *) tscpaq_dequeue(&q));
+      tscpaq_dumpq(&q, 8);
+   printf("%i\n", *(int *) tscpaq_dequeue(&q));
+      tscpaq_dumpq(&q, 9);
+   tmp = (int *) tscpaq_dequeue (&q);
    if (tmp == NULL) puts ("NULL");
    else printf("%i\n", *tmp);
-      tscaq_dumpq(&q, 10);
-   tmp = (int *) tscaq_dequeue (&q);
+      tscpaq_dumpq(&q, 10);
+   tmp = (int *) tscpaq_dequeue (&q);
    if (tmp == NULL) puts ("NULL");
    else printf ("%i\n", *tmp);
-      tscaq_dumpq(&q, 11);
+      tscpaq_dumpq(&q, 11);
 
-   tscaq_free_queue (&q);
+   tscpaq_free_queue (&q);
    return EXIT_SUCCESS;
 }
