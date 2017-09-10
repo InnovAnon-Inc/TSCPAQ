@@ -20,15 +20,24 @@ int tscpaq_init_queue (tscpaq_t *q, void *arr, size_t n) {
    return 0;
 }
 
-int tscpaq_alloc_queue (tscpaq_t *q, size_t n) {
-	void *arr = malloc (n * sizeof (void *));
-	if (arr == NULL) return -1;
-	tscpaq_init_queue (q, arr, n);
-	return 0;
+int tscpaq_uninit_queue (tscpaq_t *q) {
+   if (pthread_mutex_destroy (&(p->mutex)) != 0) return -1;
+   if (sem_destroy (&(p->full)) != 0) return -2;
+   if (sem_destroy (&(p->empty)) != 0) return -3;
+   return 0;
 }
 
-void tscpaq_free_queue (tscpaq_t *q) {
-	free_queue (&(q->cpaq));
+int tscpaq_alloc_queue (tscpaq_t *q, size_t n) {
+   void *arr = malloc (n * sizeof (void *));
+   if (arr == NULL) return -1;
+   tscpaq_init_queue (q, arr, n);
+   return 0;
+}
+
+int tscpaq_free_queue (tscpaq_t *q) {
+   free_queue (&(q->cpaq));
+   if (tscpaq_uninit_queue (q) != 0) return -1;
+   return 0;
 }
 
 int tscpaq_enqueue (tscpaq_t *q, void *elem) {

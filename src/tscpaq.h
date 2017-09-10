@@ -19,9 +19,10 @@ typedef struct {
 	sem_t empty, full;
 } tscpaq_t;
 
-void tscpaq_init_queue (tscpaq_t *q, void *arr, size_t n);
+int tscpaq_init_queue (tscpaq_t *q, void *arr, size_t n) ;
+int tscpaq_uninit_queue (tscpaq_t *q) ;
 int tscpaq_alloc_queue (tscpaq_t *q, size_t n) ;
-void tscpaq_free_queue (tscpaq_t *q) ;
+int tscpaq_free_queue (tscpaq_t *q) ;
 
 /* ret type == elem type */
 int tscpaq_dequeue (tscpaq_t *q, void **ret) ;
