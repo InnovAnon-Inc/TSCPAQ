@@ -21,9 +21,9 @@ int tscpaq_init_queue (tscpaq_t *q, void *arr, size_t n) {
 }
 
 int tscpaq_uninit_queue (tscpaq_t *q) {
-   if (pthread_mutex_destroy (&(p->mutex)) != 0) return -1;
-   if (sem_destroy (&(p->full)) != 0) return -2;
-   if (sem_destroy (&(p->empty)) != 0) return -3;
+   if (pthread_mutex_destroy (&(q->mutex)) != 0) return -1;
+   if (sem_destroy (&(q->full)) != 0) return -2;
+   if (sem_destroy (&(q->empty)) != 0) return -3;
    return 0;
 }
 
@@ -47,7 +47,7 @@ int tscpaq_enqueue (tscpaq_t *q, void *elem) {
       if (sem_wait (&(q->full)) != 0) return -3;
       if (pthread_mutex_lock (&(q->mutex)) != 0) return -4;
    } while (isfull (&(q->cpaq))) ;
-   if (enqueue (q->cpaq, elem) != 0) {
+   if (enqueue (&(q->cpaq), elem) != 0) {
       /*sem_post (&(q->empty));*/
       /*q->done = true;*/
       pthread_mutex_unlock (&(q->mutex));
@@ -105,7 +105,7 @@ int tscpaq_gethead (tscpaq_t *q, void **ret) {
 }
 
 
-void tscpaq_dumpq(tscpaq_t *q, int i) {
+int tscpaq_dumpq(tscpaq_t *q, int i) {
    if (pthread_mutex_lock (&(q->mutex)) != 0) return -1;
    dumpq (&(q->cpaq), i);
    if (pthread_mutex_unlock (&(q->mutex)) != 0) return -2;

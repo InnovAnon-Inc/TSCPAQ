@@ -31,7 +31,7 @@ int tscpaq_enqueue (tscpaq_t *q, void *elem) ;
 int tscpaq_isempty (tscpaq_t *q, bool *ret) ;
 int tscpaq_isfull (tscpaq_t *q, bool *ret) ;
 int tscpaq_gethead (tscpaq_t *q, void **ret) ;
-void tscpaq_dumpq(tscpaq_t *q, int i) ;
+int tscpaq_dumpq(tscpaq_t *q, int i) ;
 
 #ifdef __cplusplus
 }
