@@ -9,7 +9,6 @@ AC_CONFIG_FILES([
  src/Makefile
 ])
 AC_CONFIG_MACRO_DIR([m4])
-AC_OUTPUT
 
 AC_CHECK_HEADERS([stdio.h stdlib.h string.h sys/types.h])
 AC_CHECK_HEADERS([pthread.h semaphore.h])
@@ -21,3 +20,7 @@ AC_CHECK_LIB([pthread],[pthread_cond_init,pthread_cond_wait,pthread_cond_signal,
 AC_CHECK_LIB([pthread],[sem_init,sem_destroy,sem_wait,sem_post])
 AC_CHECK_LIB([cpaq],[init_queue,free_queue,enqueue,dequeue,isempty,isfull,gethead,dumpq])
 #AC_CHECK_LIB([cpaq],[alloc_queue])
+
+INNOVANON_WARNINGS([])
+
+AC_OUTPUT
