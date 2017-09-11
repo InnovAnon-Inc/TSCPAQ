@@ -38,7 +38,7 @@ int tscpaq_alloc_queue (
    size_t n) {
    void *restrict arr = malloc (n * sizeof (void *));
    error_check (arr == NULL) return -1;
-   tscpaq_init_queue (q, arr, n);
+   error_check (tscpaq_init_queue (q, arr, n) != 0) return -2;
    return 0;
 }
 
