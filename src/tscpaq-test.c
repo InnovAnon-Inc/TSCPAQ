@@ -11,18 +11,18 @@ int main(void) {
    int const *tmp;
 
    tscpaq_t q;
-   tscpaq_alloc_queue (&q, (size_t) N);
+   if (tscpaq_alloc_queue (&q, (size_t) N) != 0) return EXIT_FAILURE;
 
-   tscpaq_dumpq(&q, 1);
-   tscpaq_enqueue (&q, arr + 0);tscpaq_dumpq(&q, 2);
-   tscpaq_enqueue (&q, arr + 1);tscpaq_dumpq(&q, 3);
-   tscpaq_enqueue (&q, arr + 2);tscpaq_dumpq(&q, 4);
+   if (tscpaq_dumpq(&q, 1) != 0) return EXIT_FAILURE;
+   if (tscpaq_enqueue (&q, arr + 0) != 0) return EXIT_FAILURE; if (tscpaq_dumpq(&q, 2) != 0) return EXIT_FAILURE;
+   if (tscpaq_enqueue (&q, arr + 1) != 0) return EXIT_FAILURE; if (tscpaq_dumpq(&q, 3) != 0) return EXIT_FAILURE;
+   if (tscpaq_enqueue (&q, arr + 2) != 0) return EXIT_FAILURE; if (tscpaq_dumpq(&q, 4) != 0) return EXIT_FAILURE;
    /*tscpaq_enqueue (&q, arr + 3);tscpaq_dumpq(&q, 5);
    tscpaq_enqueue (&q, arr + 4);tscpaq_dumpq(&q, 6);*/
    /*memset (arr, 0, sizeof (arr));*/
-   tscpaq_dequeue (&q, (void const *restrict *)&tmp); printf ("%i\n", *tmp); tscpaq_dumpq(&q, 7);
-   tscpaq_dequeue (&q, (void const *restrict *)&tmp); printf ("%i\n", *tmp); tscpaq_dumpq(&q, 8);
-   tscpaq_dequeue (&q, (void const *restrict *)&tmp); printf ("%i\n", *tmp); tscpaq_dumpq(&q, 9);
+   if (tscpaq_dequeue (&q, (void const *restrict *)&tmp) != 0) return EXIT_FAILURE; printf ("%i\n", *tmp); if (tscpaq_dumpq(&q, 7) != 0) return EXIT_FAILURE;
+   if (tscpaq_dequeue (&q, (void const *restrict *)&tmp) != 0) return EXIT_FAILURE; printf ("%i\n", *tmp); if (tscpaq_dumpq(&q, 8) != 0) return EXIT_FAILURE;
+   if (tscpaq_dequeue (&q, (void const *restrict *)&tmp) != 0) return EXIT_FAILURE; printf ("%i\n", *tmp); if (tscpaq_dumpq(&q, 9) != 0) return EXIT_FAILURE;
    /*tscpaq_dequeue (&q, (void**)&tmp);
    if (tmp == NULL) puts ("NULL");
    else printf("%i\n", *tmp);
@@ -32,6 +32,6 @@ int main(void) {
    else printf("%i\n", *tmp);
    tscpaq_dumpq(&q, 11);*/
 
-   tscpaq_free_queue (&q);
+   if (tscpaq_free_queue (&q) != 0) return EXIT_FAILURE;
    return EXIT_SUCCESS;
 }
