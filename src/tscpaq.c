@@ -36,9 +36,9 @@ __attribute__ ((nonnull (1), nothrow, warn_unused_result))
 int tscpaq_alloc_queue (
    tscpaq_t *restrict q,
    size_t n) {
-   /*void const **restrict arr = malloc (n * sizeof (void *));
-   error_check (arr == NULL) return -1;*/
-   error_check (alloc_queue (&(q->cpaq), n)) return -1;
+   void const **restrict arr = malloc (n * sizeof (void *));
+   error_check (arr == NULL) return -1;
+   /*error_check (alloc_queue (&(q->cpaq), n)) return -1;*/
    error_check (tscpaq_init_queue (q, arr, n) != 0) return -2;
    return 0;
 }
