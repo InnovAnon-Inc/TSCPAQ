@@ -12,7 +12,7 @@ int head = 0;
 int tail = 0;
 */
 
-__attribute__ ((nonnull (1, 2), nothrow, warn_unused_result))
+__attribute__ ((leaf, nonnull (1, 2), nothrow, warn_unused_result))
 int tscpaq_init_queue (
    tscpaq_t *restrict q,
    void *restrict arr,
@@ -24,7 +24,7 @@ int tscpaq_init_queue (
    return 0;
 }
 
-__attribute__ ((nonnull (1), nothrow, warn_unused_result))
+__attribute__ ((leaf, nonnull (1), nothrow, warn_unused_result))
 int tscpaq_uninit_queue (tscpaq_t *restrict q) {
    error_check (pthread_mutex_destroy (&(q->mutex)) != 0) return -1;
    error_check (sem_destroy (&(q->full)) != 0) return -2;
@@ -58,7 +58,7 @@ int tscpaq_enqueue (
       error_check (pthread_mutex_unlock (&(q->mutex)) != 0) return -2;
       error_check (sem_wait (&(q->full)) != 0) return -3;
       error_check (pthread_mutex_lock (&(q->mutex)) != 0) return -4;
-      /* TODO isfull() is unexptected ? */
+      TODO (isfull() is unexptected?)
    } while (isfull (&(q->cpaq))) ;
    error_check (enqueue (&(q->cpaq), elem) != 0) {
       /*sem_post (&(q->empty));*/
@@ -83,6 +83,7 @@ int tscpaq_dequeue (
       error_check (pthread_mutex_unlock (&(q->mutex)) != 0) return -2;
       error_check (sem_wait (&(q->empty)) != 0) return -3;
       error_check (pthread_mutex_lock (&(q->mutex)) != 0) return -4;
+      TODO (isempty() is unexptected?)
    } while (isempty (&(q->cpaq))) ;
    *ret = dequeue (&(q->cpaq));
    /*if (ret == NULL) {*/
@@ -99,7 +100,7 @@ int tscpaq_dequeue (
    return 0;
 }
 
-__attribute__ ((nonnull (1, 2), nothrow, warn_unused_result))
+__attribute__ ((leaf, nonnull (1, 2), nothrow, warn_unused_result))
 int tscpaq_isempty (
    tscpaq_t *restrict q,
    bool *restrict ret) {
@@ -109,7 +110,7 @@ int tscpaq_isempty (
    return 0;
 }
 
-__attribute__ ((nonnull (1, 2), nothrow, warn_unused_result))
+__attribute__ ((leaf, nonnull (1, 2), nothrow, warn_unused_result))
 int tscpaq_isfull (
    tscpaq_t *restrict q,
    bool *restrict ret) {
