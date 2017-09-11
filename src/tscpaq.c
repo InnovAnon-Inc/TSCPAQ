@@ -1,8 +1,12 @@
-#include <stdlib.h>
+#if HAVE_CONFIG_H
+#include <config.h>
+#endif
+
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 
-#include "tscpaq.h"
+#include <tscpaq.h>
 
 /*#define n (4)*/
 
