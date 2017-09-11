@@ -21,7 +21,7 @@ typedef struct {
 
 int tscpaq_init_queue (
 	tscpaq_t *restrict q,
-	void *restrict arr,
+	void const *arr[],
 	size_t n)
 __attribute__ ((leaf, nonnull (1, 2), nothrow, warn_unused_result)) ;
 
