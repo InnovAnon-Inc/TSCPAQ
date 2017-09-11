@@ -22,9 +22,10 @@ int tscpaq_init_queue (
    void const *arr[],
    size_t n) {
    init_queue (&(q->cpaq), arr, n);
-   q->mutex = (pthread_mutex_t) PTHREAD_MUTEX_INITIALIZER;
-   error_check (sem_init (&(q->full),  0, (unsigned int) n) != 0) return -1;
-   error_check (sem_init (&(q->empty), 0,                 0) != 0) return -2;
+   /*q->mutex = (pthread_mutex_t) PTHREAD_MUTEX_INITIALIZER;*/
+   error_check (pthread_mutex_init (&(q->mutex), NULL)) return -1;
+   error_check (sem_init (&(q->full),  0, (unsigned int) n) != 0) return -2;
+   error_check (sem_init (&(q->empty), 0,                 0) != 0) return -3;
    return 0;
 }
 
