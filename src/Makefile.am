@@ -1,7 +1,8 @@
 lib_LTLIBRARIES = libtscpaq.la
 libtscpaq_la_SOURCES = tscpaq.c
 include_HEADERS	= tscpaq.h
-libtscpaq_la_LDFLAGS = -lcpaq -lpthread
+#libtscpaq_la_LDFLAGS = -lcpaq -lpthread
+libtscpaq_la_LIBADD = -lcpaq -lpthread
 #libtscpaq_la_CFLAGS =
 
 bin_PROGRAMS = tscpaq-test
