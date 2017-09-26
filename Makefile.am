@@ -1,3 +1,6 @@
 SUBDIRS = glitter CPAQ src
 dist_doc_DATA = README.md
-ACLOCAL_AMFLAGS = -I m4 -I glitter/src -I CPAQ/src
+ACLOCAL_AMFLAGS = -I m4
+ACLOCAL_AMFLAGS += -I $(srcdir)/glitter/src
+ACLOCAL_AMFLAGS += -I $(srcdir)/CPAQ/src
+
