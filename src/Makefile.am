@@ -9,4 +9,4 @@ tscpaq_test_SOURCES = tscpaq-test.c
 tscpaq_test_LDADD = libtscpaq.la -lcpaq -lpthread
 #tscpaq_test_CFLAGS =
 
-AM_CPPFLAGS = -D__STDC_INT64__
+AM_CPPFLAGS += -D__STDC_INT64__
