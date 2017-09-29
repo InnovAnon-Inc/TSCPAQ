@@ -25,7 +25,7 @@ int tscpaq_init_queue (
 	size_t n)
 __attribute__ ((leaf, nonnull (1, 2), nothrow, warn_unused_result)) ;
 
-int tscpaq_uninit_queue (tscpaq_t const *restrict q)
+int tscpaq_uninit_queue (tscpaq_t *restrict q)
 __attribute__ ((leaf, nonnull (1), nothrow, warn_unused_result)) ;
 
 int tscpaq_alloc_queue (
