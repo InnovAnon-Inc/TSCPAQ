@@ -30,7 +30,7 @@ int tscpaq_init_queue (
 }
 
 __attribute__ ((leaf, nonnull (1), nothrow, warn_unused_result))
-int tscpaq_uninit_queue (tscpaq_t const *restrict q) {
+int tscpaq_uninit_queue (tscpaq_t *restrict q) {
    error_check (pthread_mutex_destroy (&(q->mutex)) != 0) return -1;
    error_check (sem_destroy (&(q->full))  != 0) return -2;
    error_check (sem_destroy (&(q->empty)) != 0) return -3;
