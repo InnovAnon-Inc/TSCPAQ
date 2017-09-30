@@ -20,11 +20,11 @@ AM_CPPFLAGS = -D__STDC_INT64__
 SUBDIRS =
 
 #SUBDIRS += $(top_srcdir)/glitter
-#SUBDIRS += ../glitter
+SUBDIRS += ../glitter
 #AM_CPPFLAGS += -I $(top_srcdir)/glitter/src
 AM_CPPFLAGS += -I ./glitter/src
 
 #SUBDIRS += $(top_srcdir)/CPAQ
-#SUBDIRS += ../CPAQ
+SUBDIRS += ../CPAQ
 #AM_CPPFLAGS += -I $(top_srcdir)/CPAQ/src
 AM_CPPFLAGS += -I ../CPAQ/src
