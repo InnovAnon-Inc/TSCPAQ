@@ -1,12 +1,13 @@
+LIBTSCPAQ_LIBADD = $(top_srcdir)/CPAQ/src/.libs/libcpaq.la -lpthread
 lib_LTLIBRARIES = libtscpaq.la
 libtscpaq_la_SOURCES = tscpaq.c
 include_HEADERS	= tscpaq.h
-libtscpaq_la_LIBADD = $(top_srcdir)/CPAQ/src/libcpaq.la -lpthread
+libtscpaq_la_LIBADD = $(LIBTSCPAQ_LIBADD)
 #libtscpaq_la_CFLAGS =
 
 bin_PROGRAMS = tscpaq-test
 tscpaq_test_SOURCES = tscpaq-test.c
-tscpaq_test_LDADD = libtscpaq.la $(top_srcdir)/CPAQ/src/libcpaq.la -lpthread
+tscpaq_test_LDADD = $(LIBTSCPAQ_LIBADD)
 #tscpaq_test_CFLAGS =
 
 AM_CPPFLAGS = -D__STDC_INT64__
