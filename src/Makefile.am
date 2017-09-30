@@ -1,5 +1,5 @@
-LIBTSCPAQ_LIBADD = -L$(top_srcdir)/CPAQ/src/.libs -lcpaq
-#LIBTSCPAQ_LIBADD = $(top_srcdir)/CPAQ/src/.libs/libcpaq.la
+#LIBTSCPAQ_LIBADD = -L$(top_srcdir)/CPAQ/src/.libs -lcpaq
+LIBTSCPAQ_LIBADD = $(top_srcdir)/CPAQ/src/.libs/libcpaq.la
 #LIBTSCPAQ_LIBADD = -l$(top_srcdir)/CPAQ/src/.libs/libcpaq.la
 LIBTSCPAQ_LIBADD += -lpthread
 
