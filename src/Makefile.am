@@ -1,4 +1,7 @@
-LIBTSCPAQ_LIBADD = $(top_srcdir)/CPAQ/src/.libs/libcpaq.la -lpthread
+LIBTSCPAQ_LIBADD = -L $(top_srcdir)/CPAQ/src/.libs -lcpaq
+#LIBTSCPAQ_LIBADD = -L $(top_srcdir)/CPAQ/src/.libs/libcpaq.la
+LIBTSCPAQ_LIBADD += -lpthread
+
 lib_LTLIBRARIES = libtscpaq.la
 libtscpaq_la_SOURCES = tscpaq.c
 include_HEADERS	= tscpaq.h
