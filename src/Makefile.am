@@ -1,5 +1,6 @@
 #LIBTSCPAQ_LIBADD = -L$(top_srcdir)/CPAQ/src/.libs -lcpaq
-LIBTSCPAQ_LIBADD = $(top_srcdir)/CPAQ/src/.libs/libcpaq.la
+#LIBTSCPAQ_LIBADD = $(top_srcdir)/CPAQ/src/.libs/libcpaq.la
+LIBTSCPAQ_LIBADD = ../CPAQ/src/.libs/libcpaq.la
 #LIBTSCPAQ_LIBADD = -l$(top_srcdir)/CPAQ/src/.libs/libcpaq.la
 LIBTSCPAQ_LIBADD += -lpthread
 
@@ -18,8 +19,10 @@ AM_CPPFLAGS = -D__STDC_INT64__
 
 SUBDIRS =
 
-SUBDIRS += $(top_srcdir)/glitter
+#SUBDIRS += $(top_srcdir)/glitter
+SUBDIRS += ../glitter
 AM_CPPFLAGS += -I $(top_srcdir)/glitter/src
 
-SUBDIRS += $(top_srcdir)/CPAQ
+#SUBDIRS += $(top_srcdir)/CPAQ
+SUBDIRS += ../CPAQ
 AM_CPPFLAGS += -I $(top_srcdir)/CPAQ/src
