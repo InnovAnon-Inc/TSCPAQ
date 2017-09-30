@@ -6,11 +6,7 @@ AM_CPPFLAGS += -I $(top_srcdir)/glitter/src
 SUBDIRS += ../CPAQ
 AM_CPPFLAGS += -I $(top_srcdir)/CPAQ/src
 
-#LIBTSCPAQ_LIBADD = -L$(top_srcdir)/CPAQ/src/.libs -lcpaq
-#LIBTSCPAQ_LIBADD = $(top_srcdir)/CPAQ/src/.libs/libcpaq.la
-LIBTSCPAQ_LIBADD = ../CPAQ/src/.libs/libcpaq.la
-#LIBTSCPAQ_LIBADD = -l$(top_srcdir)/CPAQ/src/.libs/libcpaq.la
-LIBTSCPAQ_LIBADD += -lpthread
+include Makefile-LIBADD.inc
 
 lib_LTLIBRARIES = libtscpaq.la
 include_HEADERS	= tscpaq.h
