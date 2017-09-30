@@ -15,5 +15,9 @@ tscpaq_test_LDADD = $(LIBTSCPAQ_LIBADD)
 #tscpaq_test_CFLAGS =
 
 AM_CPPFLAGS = -D__STDC_INT64__
+
 AM_CPPFLAGS += -I $(top_srcdir)/glitter/src
+SUBDIRS += $(top_srcdir)/glitter
+
 AM_CPPFLAGS += -I $(top_srcdir)/CPAQ/src
+SUBDIRS += $(top_srcdir)/CPAQ
