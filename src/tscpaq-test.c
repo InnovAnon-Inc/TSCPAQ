@@ -11,6 +11,7 @@
 #define N (4)
 
 int main(void) {
+#ifdef TEST
    int arr[] = {101, 202, 303, 404, 505};
    int const *tmp;
 
@@ -37,5 +38,6 @@ int main(void) {
    tscpaq_dumpq(&q, 11);*/
 
    if (tscpaq_free_queue (&q) != 0) return EXIT_FAILURE;
+#endif
    return EXIT_SUCCESS;
 }

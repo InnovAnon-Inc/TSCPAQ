@@ -41,7 +41,7 @@ __attribute__ ((nonnull (1), nothrow, warn_unused_result))
 int tscpaq_alloc_queue (
    tscpaq_t *restrict q,
    size_t n) {
-   void const **restrict arr = malloc (n * sizeof (void *));
+   void **restrict arr = malloc (n * sizeof (void *));
    error_check (arr == NULL) return -1;
    /*error_check (alloc_queue (&(q->cpaq), n)) return -1;*/
    error_check (tscpaq_init_queue (q, arr, n) != 0) return -2;
@@ -83,7 +83,7 @@ int tscpaq_enqueue (
 __attribute__ ((nonnull (1, 2), nothrow, warn_unused_result))
 int tscpaq_dequeue (
    tscpaq_t *restrict q,
-   void *restrict *restrict ret) {
+   void const *restrict *restrict ret) {
    error_check (pthread_mutex_lock (&(q->mutex)) != 0) return -1;
    do {
       error_check (pthread_mutex_unlock (&(q->mutex)) != 0) return -2;
@@ -135,7 +135,7 @@ int tscpaq_gethead (
    error_check (pthread_mutex_unlock (&(q->mutex)) != 0) return -2;
    return 0;
 }
-
+/*
 __attribute__ ((nonnull (1), nothrow, warn_unused_result))
 int tscpaq_dumpq(
    tscpaq_t *restrict q,
@@ -145,3 +145,4 @@ int tscpaq_dumpq(
    error_check (pthread_mutex_unlock (&(q->mutex)) != 0) return -2;
    return 0;
 }
+*/
