@@ -66,12 +66,7 @@ int tscpaq_enqueue (
       error_check (pthread_mutex_lock (&(q->mutex)) != 0) return -4;
       TODO (isfull() is unexptected?)
    } while (isfull (&(q->cpaq))) ;
-   error_check (enqueue (&(q->cpaq), elem) != 0) {
-      /*sem_post (&(q->empty));*/
-      /*q->done = true;*/
-      pthread_mutex_unlock (&(q->mutex));
-      return -5;
-   }
+   enqueue (&(q->cpaq), elem);
    error_check (sem_post (&(q->empty)) != 0) {
       pthread_mutex_unlock (&(q->mutex));
       return -6;
