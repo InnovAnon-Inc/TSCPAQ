@@ -19,7 +19,7 @@ int tail = 0;
 __attribute__ ((leaf, nonnull (1, 2), nothrow, warn_unused_result))
 int tscpaq_init_queue (
    tscpaq_t *restrict q,
-   void const *arr[],
+   void *arr[],
    size_t n) {
    init_queue (&(q->cpaq), arr, n);
    /*q->mutex = (pthread_mutex_t) PTHREAD_MUTEX_INITIALIZER;*/
@@ -58,7 +58,7 @@ int tscpaq_free_queue (tscpaq_t *restrict q) {
 __attribute__ ((nonnull (1, 2), nothrow, warn_unused_result))
 int tscpaq_enqueue (
    tscpaq_t *restrict q,
-   void const *restrict elem) {
+   void *restrict elem) {
    error_check (pthread_mutex_lock (&(q->mutex)) != 0) return -1;
    do {
       error_check (pthread_mutex_unlock (&(q->mutex)) != 0) return -2;
@@ -83,7 +83,7 @@ int tscpaq_enqueue (
 __attribute__ ((nonnull (1, 2), nothrow, warn_unused_result))
 int tscpaq_dequeue (
    tscpaq_t *restrict q,
-   void const *restrict *restrict ret) {
+   void *restrict *restrict ret) {
    error_check (pthread_mutex_lock (&(q->mutex)) != 0) return -1;
    do {
       error_check (pthread_mutex_unlock (&(q->mutex)) != 0) return -2;
