@@ -39,7 +39,7 @@ __attribute__ ((nonnull (1), nothrow, warn_unused_result)) ;
 /* ret type == elem type */
 int tscpaq_dequeue (
 	tscpaq_t *restrict q,
-	void *ret[])
+	void const *restrict *restrict ret)
 __attribute__ ((nonnull (1, 2), nothrow, warn_unused_result)) ;
 
 /* returns err code */
@@ -60,7 +60,7 @@ __attribute__ ((leaf, nonnull (1, 2), nothrow, warn_unused_result)) ;
 
 int tscpaq_gethead (
 	tscpaq_t *restrict q,
-	void *restrict ret)
+	void const *restrict *restrict ret)
 __attribute__ ((nonnull (1, 2), nothrow, warn_unused_result)) ;
 /*
 int tscpaq_dumpq(
