@@ -1,4 +1,4 @@
-include $(top_srcdir)/CPAQ/src/Makefile-LIBADD.inc
+#include $(top_srcdir)/CPAQ/src/Makefile-LIBADD.inc
 
 #if USE_SUBMODULES
 #LIBTSCPAQ_LIBADD  = ../CPAQ/src/.libs/libcpaq.la $(LIBCPAQ_LIBADD)
