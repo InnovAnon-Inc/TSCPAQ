@@ -2,5 +2,5 @@
 set -eu
 [ $# -eq 1 ]
 [ $1 == --libs ]
-libtscpaq_config --libs
+echo -ltscpaq `libtscpaq_config --libs`
 

@@ -28,10 +28,11 @@ AC_CHECK_LIB([pthread],[sem_init,sem_destroy,sem_wait,sem_post])
 AC_CHECK_LIB([cpaq],[init_queue,free_queue,enqueue,dequeue,isempty,isfull,gethead,dumpq])
 #AC_CHECK_LIB([cpaq],[alloc_queue])
 
-LIBTSCPAQ_LIBADD="`PATH=src:$PATH libtscpaq_config --libs`"
+srcdir = @srcdir@
+LIBTSCPAQ_LIBADD="`PATH=$(srcdir)src:$PATH libtscpaq_config --libs`"
 AC_SUBST(LIBTSCPAQ_LIBADD)
 
-TSCPAQ_TEST_LIBADD="libtscpaq.la `PATH=src:$PATH tscpaq_test_config --libs`"
+TSCPAQ_TEST_LIBADD="`PATH=$(srcdir)src:$PATH tscpaq_test_config --libs`"
 AC_SUBST(TSCPAQ_TEST_LIBADD)
 
 INNOVANON_WARNINGS([])
