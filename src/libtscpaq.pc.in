@@ -1,0 +1,15 @@
+prefix=@prefix@
+exec_prefix=@exec_prefix@
+libdir=@libdir@
+includedir=@includedir@
+
+#tscpaq_utility=tscpaq-test
+
+Name: @PACKAGE_NAME@
+Description: tscpaq library
+Version: @PACKAGE_VERSION@
+Libs: -L${libdir} -ltscpaq
+Cflags: -I${includedir}
+Requires: glitter libcpaq
+Requires.private: -lpthread
+

@@ -8,35 +8,33 @@ AC_CONFIG_HEADERS([config.h])
 AC_CONFIG_FILES([
  Makefile
  src/Makefile
+ src/libtscpaq.pc
+ src/tscpaq-test.pc
 ])
+
+PKG_PROG_PKG_CONFIG
 
 AC_ARG_ENABLE([use-submodules],
     AS_HELP_STRING([--enable-use-submodules], [Enable use submodules]))
 AM_CONDITIONAL([USE_SUBMODULES], [test x"$enable_use_submodules" = "xyes"])
 
 AC_CONFIG_MACRO_DIR([m4])
-#AC_CONFIG_SUBDIRS([glitter CPAQ])
 
 AC_CHECK_HEADERS([stdio.h stdlib.h string.h sys/types.h])
 AC_CHECK_HEADERS([pthread.h semaphore.h])
-AC_CHECK_HEADERS([cpaq.h glitter.h])
+#AC_CHECK_HEADERS([cpaq.h glitter.h])
 
 AC_CHECK_LIB([pthread],[pthread_create,pthread_detach,pthread_kill])
 AC_CHECK_LIB([pthread],[pthread_mutex_init,pthread_mutex_lock,pthread_mutex_unlock])
 AC_CHECK_LIB([pthread],[pthread_cond_init,pthread_cond_wait,pthread_cond_signal,pthread_cond_broadcast])
 AC_CHECK_LIB([pthread],[sem_init,sem_destroy,sem_wait,sem_post])
-AC_CHECK_LIB([cpaq],[init_queue,free_queue,enqueue,dequeue,isempty,isfull,gethead,dumpq])
+#AC_CHECK_LIB([cpaq],[init_queue,free_queue,enqueue,dequeue,isempty,isfull,gethead,dumpq])
 #AC_CHECK_LIB([cpaq],[alloc_queue])
 
-#srcdir = @srcdir@
-#LIBTSCPAQ_LIBADD="`PATH=$(srcdir)src:$PATH libtscpaq_config --libs`"
-LIBTSCPAQ_LIBADD="`PATH=src:$PATH libtscpaq_config --libs`"
-AC_SUBST(LIBTSCPAQ_LIBADD)
-
-#TSCPAQ_TEST_LIBADD="`PATH=$(srcdir)src:$PATH tscpaq_test_config --libs`"
-TSCPAQ_TEST_LIBADD="`PATH=src:$PATH tscpaq_test_config --libs`"
-AC_SUBST(TSCPAQ_TEST_LIBADD)
+PKG_CHECK_MODULES([GLITTER],[glitter],,)
+PKG_CHECK_MODULES([CPAQ],[libcpaq],,)
 
 INNOVANON_WARNINGS([])
 
 AC_OUTPUT
+

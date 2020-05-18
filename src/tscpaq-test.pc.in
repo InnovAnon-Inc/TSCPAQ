@@ -1,0 +1,15 @@
+prefix=@prefix@
+exec_prefix=@exec_prefix@
+libdir=@libdir@
+includedir=@includedir@
+
+tscpaq_utility=tscpaq-test
+
+Name: @PACKAGE_NAME@ test
+Description: tscpaq library test application
+Version: @PACKAGE_VERSION@
+Libs: -L${libdir} -ltscpaq
+Cflags: -I${includedir}
+Requires:
+Requires.private: libcpaq -lpthread
+
