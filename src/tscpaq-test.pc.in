@@ -9,8 +9,10 @@ Name: @PACKAGE_NAME@ test
 Description: tscpaq library test application
 Version: @PACKAGE_VERSION@
 #Libs: -L${libdir} -ltscpaq -lpthread
-Libs: -L${libdir} -ltscpaq @PTHREAD_CFLAGS@ @PTHREAD_LIBS@
+#Libs: -L${libdir} -ltscpaq @PTHREAD_CFLAGS@ @PTHREAD_LIBS@
+Libs: -L${libdir} -ltscpaq
 Cflags: -I${includedir}
 Requires:
 Requires.private: libcpaq
+Libs.private: @PTHREAD_CFLAGS@ @PTHREAD_LIBS@
 
