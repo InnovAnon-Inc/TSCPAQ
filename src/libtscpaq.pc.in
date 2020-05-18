@@ -8,8 +8,8 @@ includedir=@includedir@
 Name: @PACKAGE_NAME@
 Description: tscpaq library
 Version: @PACKAGE_VERSION@
-Libs: -L${libdir} -ltscpaq
+Libs: -L${libdir} -ltscpaq -lpthread
 Cflags: -I${includedir}
 Requires: glitter libcpaq
-Requires.private: -lpthread
+Requires.private:
 

@@ -8,8 +8,8 @@ tscpaq_utility=tscpaq-test
 Name: @PACKAGE_NAME@ test
 Description: tscpaq library test application
 Version: @PACKAGE_VERSION@
-Libs: -L${libdir} -ltscpaq
+Libs: -L${libdir} -ltscpaq -lpthread
 Cflags: -I${includedir}
 Requires:
-Requires.private: libcpaq -lpthread
+Requires.private: libcpaq
 
